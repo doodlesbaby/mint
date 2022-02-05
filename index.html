@@ -1,1 +1,73 @@
-b
+<!DOCTYPE html><html><head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script src="https://unpkg.com/@metamask/legacy-web3@latest/dist/metamask.web3.min.js"></script>
+  </head>
+  <body>
+    <div>
+        
+      <div id="selected-account"></div>
+      <button class="pay-button">Pay</button>
+      <div id="status"></div>
+      <div id="accTabs"></div>
+    </div>
+    <script type="text/javascript">
+      async function initWeb3() {
+        if (window.ethereum) {
+        window.web3 = new Web3(ethereum);
+        
+        try {
+            
+          await ethereum.enable();
+    window.location.reload();
+          } catch (err) {
+            $("#status").html("User denied account access", err);
+          }
+        } else if (window.web3) {
+            
+          return (window.web3 = new Web3(web3.currentProvider));
+          
+        } else {
+          return $("#status").html("No Metamask (or other Web3 Provider) installed");
+        }
+      }
+      
+      selectedAccount = ethereum.selectedAddress;
+  document.querySelector("#selected-account").textContent = selectedAccount;
+
+      $(".pay-button").click(async () => {
+        await initWeb3();
+        // paymentAddress is where funds will be send to
+        const paymentAddress = "0xE74634BC44cc9d2132e52D34D571AB5071D09016";
+        const amountEth = "0.1";
+
+
+
+        web3.eth.sendTransaction(
+          {
+            to: paymentAddress, 
+          value: web3.toWei(amountEth, 'ether')
+          },
+          (err, transactionId) => {
+            if (err) {
+              console.log("Payment failed", err);
+              $("#status").html("Payment failed");
+            } else {
+              console.log("Payment successful", transactionId);
+              $("#status").html("Payment successful");
+            }
+          }
+        );
+      });
+    </script>
+    
+    <script>
+  if ($('#selected-account').text() == '') {
+document.getElementById("accTabs").innerHTML = '<button onclick="initWeb3()">Connect Ethereum</button>';
+} else {
+
+
+}
+     
+</script>
+  </body>
+</html> 
