@@ -277,7 +277,7 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
               await ethereum.enable();
         window.location.reload();
               } catch (err) {
-                $("#status").html("User denied account access", err);
+                $("#status").html("You declined the action in your wallet.", err);
               }
             } else if (window.web3) {
                 
