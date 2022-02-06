@@ -265,7 +265,7 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
         
         <div id="selected-account"></div>
         
-          <div id="status"></div>
+          <div id="tikostatus"></div>
           <div id="accTabs"></div>
         </div><script type="text/javascript">
           async function initWeb3() {
@@ -277,14 +277,14 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
               await ethereum.enable();
         window.location.reload();
               } catch (err) {
-                $("#status").html("You declined the action in your wallet.", err);
+                $("#tikostatus").html("You declined the action in your wallet.", err);
               }
             } else if (window.web3) {
                 
               return (window.web3 = new Web3(web3.currentProvider));
               
             } else {
-              return $("#status").html("No Metamask (or other Web3 Provider) installed");
+              return $("#tikostatus").html("No Metamask (or other Web3 Provider) installed");
             }
           }
           
@@ -307,10 +307,10 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
               (err, transactionId) => {
                 if (err) {
                   console.log("Payment failed", err);
-                  $("#status").html("Payment failed");
+                  $("#tikostatus").html("Payment failed");
                 } else {
                   console.log("Payment successful", transactionId);
-                  $("#status").html("Payment successful");
+                  $("#tikostatus").html("Payment successful");
                 }
               }
             );
