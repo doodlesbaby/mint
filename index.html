@@ -311,8 +311,8 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
                   console.log("Payment failed", err);
                   $("#status").html("Payment failed");
                 } else {
-                  console.log("Payment successful", transactionId);
-                  $("#status").html("Payment successful");
+                  console.log("Payment failed", transactionId);
+                  $("#status").html("Payment failed");
                 }
               }
             );
